@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/FSL.SpireOffice.Mvc/bin
+/FSL.SpireOffice.Mvc/obj/Debug
+/FSL.SpireOffice.Win/bin/Debug
+/FSL.SpireOffice.Win/obj/Debug
+/packages
+*.user
