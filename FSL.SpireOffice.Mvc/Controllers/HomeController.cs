@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -44,9 +45,16 @@ namespace FSL.SpireOffice.Mvc.Controllers
         public ActionResult FromHtmlToPDF()
         {
             PdfDocument doc = new PdfDocument();
+            var url = "https://fabiosilvalima.net/en/start-here";
 
-            var url = "https://fabiosilvalima.net/";
-            doc.LoadFromHTML(url, false, true, true);
+            Thread thread = new Thread(() =>
+            {
+                doc.LoadFromHTML(url, false, true, true);
+            });
+
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            thread.Join();
             doc.SaveToFile(Server.MapPath("~/App_Data/fabiosilvalima.pdf"));
             doc.Close();
 
