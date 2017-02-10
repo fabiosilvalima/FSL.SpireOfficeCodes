@@ -1,4 +1,5 @@
 ﻿using Spire.Pdf;
+using Spire.Presentation;
 using Spire.Xls;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace FSL.SpireOffice.Mvc.Controllers
 
             DataTable dtt = sheet.ExportDataTable();
             
-            return View();
+            return View("Index");
         }
 
         public ActionResult FromDataTableToFile()
@@ -39,7 +40,7 @@ namespace FSL.SpireOffice.Mvc.Controllers
             workbook.Worksheets.Add(sheet);
 
 
-            return View();
+            return View("Index");
         }
 
         public ActionResult FromHtmlToPDF()
@@ -58,7 +59,16 @@ namespace FSL.SpireOffice.Mvc.Controllers
             doc.SaveToFile(Server.MapPath("~/App_Data/fabiosilvalima.pdf"));
             doc.Close();
 
-            return View();
+            return View("Index");
+        }
+
+        public ActionResult FromPptToPDF()
+        {
+            Presentation presentation = new Presentation();
+            presentation.LoadFromFile(Server.MapPath("~/App_Data/origem.ppt"));
+            presentation.SaveToFile(Server.MapPath("~/App_Data/fabiosilvalima_ppt.pdf"), Spire.Presentation.FileFormat.PDF);
+
+            return View("Index");
         }
 
         public ActionResult About()
